@@ -8,11 +8,14 @@
 
 [Speaker Diarization in the Elisa Consortium over the last 4 years](https://pdfs.semanticscholar.org/0b9c/da99d6a852673c84ba3ae2c40b77d7c4e833.pdf?_ga=2.94694236.1780475471.1496149585-294408254.1496149585)
 
+
 ### Text Diarisation
 Speaker Diarization from Speech Transcripts: ftp://m170.limsi.fr/public/TuC2105o.3_p1272.pdf
 
+
 ### Meeting Summarisation
 [RNNs Summarisation](http://www.abigailsee.com/2017/04/16/taming-rnns-for-better-summarization.html)
+
 
 ### Existing Tools and APIs
 [pyAudioAnalysis](https://github.com/tyiannak/pyAudioAnalysis/wiki/5.-Segmentation#speaker-diarization)
@@ -24,3 +27,9 @@ Speaker Diarization from Speech Transcripts: ftp://m170.limsi.fr/public/TuC2105o
 [LIUM Speaker Diarization (Plenty of Papers available on Wiki)](http://www-lium.univ-lemans.fr/diarization/doku.php/overview)
 
 [Diarize-jruby (Used by BBC World Services R&D)](https://github.com/bbc/diarize-jruby)
+
+
+### Speech Recognition
+[Python Speech Recognition library](https://github.com/Uberi/speech_recognition)
+
+[List of Speech Recognition APIs](https://www.quora.com/What-are-the-top-ten-speech-recognition-APIs)
