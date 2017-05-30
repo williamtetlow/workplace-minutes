@@ -8,6 +8,9 @@
 
 [Speaker Diarization in the Elisa Consortium over the last 4 years](https://pdfs.semanticscholar.org/0b9c/da99d6a852673c84ba3ae2c40b77d7c4e833.pdf?_ga=2.94694236.1780475471.1496149585-294408254.1496149585)
 
+[NIST Rich Transcription Evaluations]
+(https://www.nist.gov/itl/iad/mig/rich-transcription-evaluation)
+
 
 ### Text Diarisation
 Speaker Diarization from Speech Transcripts: ftp://m170.limsi.fr/public/TuC2105o.3_p1272.pdf
