@@ -10,10 +10,10 @@
 
 [NIST Rich Transcription Evaluations](https://www.nist.gov/itl/iad/mig/rich-transcription-evaluation)
 
+[AMI Meeting test data sets - rich and multimodal](http://groups.inf.ed.ac.uk/ami/corpus/)
 
 ### Text Diarisation
 Speaker Diarization from Speech Transcripts: ftp://m170.limsi.fr/public/TuC2105o.3_p1272.pdf
-
 
 ### Meeting Summarisation
 [RNNs Summarisation](http://www.abigailsee.com/2017/04/16/taming-rnns-for-better-summarization.html)
