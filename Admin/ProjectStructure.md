@@ -1,5 +1,3 @@
-
-
 # Project Structure
 * Front End (Smartphone App)
   * App UI Design
