@@ -4,7 +4,9 @@ open System
 open System.Collections.Generic
 open System.Linq
 open System.Threading.Tasks
+open System.IO
 open Microsoft.AspNetCore.Mvc
+open Microsoft.AspNetCore.Http
 
 
 [<Route("api/[controller]")>]
@@ -18,6 +20,17 @@ type ValuesController() =
     // GET api/values/5
     [<HttpGet("{id}")>]
     member this.Get(id:int) = "value"
+
+    [<HttpPost("post-audio")>]
+    member this.PostAudio([<FromBody>]file:IFormFile) =
+      let fileSize = file.Length
+
+      use stream = new FileStream("", FileMode.Create)
+
+      let copyToLocationAsync = file.CopyToAsync stream
+
+      this.Ok fileSize
+
 
     // POST api/values
     [<HttpPost>]
