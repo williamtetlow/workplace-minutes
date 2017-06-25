@@ -7,7 +7,7 @@ open System.Threading.Tasks
 open System.IO
 open Microsoft.AspNetCore.Mvc
 open Microsoft.AspNetCore.Http
-open Service.Helpers
+open Service.FileUpload
 
 [<Route("api/audio-file-upload")>]
 type AudioFileUploadController() = 
@@ -16,6 +16,16 @@ type AudioFileUploadController() =
     // POST api/audio-file-upload
     [<HttpPost>]
     member this.Post([<FromBody>] file : IFormFile) =
-      let fileType = { Mime = file.ContentType }
-      
+      let uploadFileAsync (fileToUpload : IFormFile) path =
+        fileToUpload.CopyToAsync(path)
+
+      let fileType = { file = file }
+
+      let shouldProceedWithUpload = 
+        fileType.IsAudioFile && file.Length > int64 0
+
+      let operation = 
+        match shouldProceedWithUpload with
+          | true -> Some(uploadFileAsync file)
+          | false -> None
       0

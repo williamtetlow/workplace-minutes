@@ -22,6 +22,11 @@ type Startup (env:IHostingEnvironment)=
 
     // This method gets called by the runtime. Use this method to add services to the container.
     member this.ConfigureServices (services:IServiceCollection) =
+        // Adds services required for options
+        services.AddOptions() |> ignore
+
+        // Register the IConfiguration instance which MyOptions binds against
+        
         // Add framework services.
         services.AddMvc() |> ignore
 

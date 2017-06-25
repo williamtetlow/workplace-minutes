@@ -1,4 +1,6 @@
 source https://api.nuget.org/v3/index.json
 nuget FAKE
 nuget FSharp.Core
+nuget Google.Cloud.Storage.V1
+nuget Microsoft.AspNetCore.Http
 nuget Newtonsoft.Json
