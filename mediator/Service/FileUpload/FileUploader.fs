@@ -1,7 +1,6 @@
 namespace Service.FileUpload
 
 open System
-open Google.Cloud.Storage.V1
 
 module FileUploader =
   type FileUploadResult = { Success : bool; ErrorMessage : string option }

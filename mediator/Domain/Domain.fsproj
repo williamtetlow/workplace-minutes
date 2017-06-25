@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Entities/*.fs" />
-    <Compile Include="ValueTypes/*.fs" />
+    <Compile Include="Types/*.fs" />
+    <Compile Include="Functions/*.fs" />
     <EmbeddedResource Include="**\*.resx" />
   </ItemGroup>
 

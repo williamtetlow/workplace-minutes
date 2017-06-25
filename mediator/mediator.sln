@@ -14,6 +14,8 @@ Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Service", "Service/Service.
 EndProject
 Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Domain", "Domain/Domain.fsproj", "{CC5CADC8-3EB4-488C-8104-3664D8EE5897}"
 EndProject
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Persistence", "Persistence/Persistence.fsproj", "{12C44B46-7BFC-4566-8988-0C19BE96D6EE}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,5 +89,17 @@ Global
 		{CC5CADC8-3EB4-488C-8104-3664D8EE5897}.Release|x64.Build.0 = Release|x64
 		{CC5CADC8-3EB4-488C-8104-3664D8EE5897}.Release|x86.ActiveCfg = Release|x86
 		{CC5CADC8-3EB4-488C-8104-3664D8EE5897}.Release|x86.Build.0 = Release|x86
+		{12C44B46-7BFC-4566-8988-0C19BE96D6EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12C44B46-7BFC-4566-8988-0C19BE96D6EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12C44B46-7BFC-4566-8988-0C19BE96D6EE}.Debug|x64.ActiveCfg = Debug|x64
+		{12C44B46-7BFC-4566-8988-0C19BE96D6EE}.Debug|x64.Build.0 = Debug|x64
+		{12C44B46-7BFC-4566-8988-0C19BE96D6EE}.Debug|x86.ActiveCfg = Debug|x86
+		{12C44B46-7BFC-4566-8988-0C19BE96D6EE}.Debug|x86.Build.0 = Debug|x86
+		{12C44B46-7BFC-4566-8988-0C19BE96D6EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12C44B46-7BFC-4566-8988-0C19BE96D6EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12C44B46-7BFC-4566-8988-0C19BE96D6EE}.Release|x64.ActiveCfg = Release|x64
+		{12C44B46-7BFC-4566-8988-0C19BE96D6EE}.Release|x64.Build.0 = Release|x64
+		{12C44B46-7BFC-4566-8988-0C19BE96D6EE}.Release|x86.ActiveCfg = Release|x86
+		{12C44B46-7BFC-4566-8988-0C19BE96D6EE}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 EndGlobal

@@ -9,6 +9,7 @@ open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
+open mediator.Types.CommonTypes
 
 type Startup (env:IHostingEnvironment)=
 
@@ -25,7 +26,8 @@ type Startup (env:IHostingEnvironment)=
         // Adds services required for options
         services.AddOptions() |> ignore
 
-        // Register the IConfiguration instance which MyOptions binds against
+        // Add Settings
+        services.Configure<ApplicationOptions> configuration |> ignore
         
         // Add framework services.
         services.AddMvc() |> ignore

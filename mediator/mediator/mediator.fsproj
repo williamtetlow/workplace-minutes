@@ -4,6 +4,8 @@
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Types/*.fs" />
+    <Compile Include="Functions/*.fs" />
     <Compile Include="Controllers/*.fs" />
     <Compile Include="Startup.fs" />
     <Compile Include="Program.fs" />
