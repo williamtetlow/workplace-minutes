@@ -7,7 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Types/*.fs" />
+    <Compile Include="Types/FileTypes.fs"/>
+    <Compile Include="Types/SourceSystemUser.fs" />
+    <Compile Include="Types/UploadFile.fs"/>
+    <Compile Include="Types/StorageLocation.fs"/>
+    <Compile Include="Types/StoredFile.fs" />
+    <Compile Include="Types/EvaluationProcess.fs" />
+    <Compile Include="Types/EvaluationResult.fs" />
     <Compile Include="Functions/*.fs" />
     <EmbeddedResource Include="**\*.resx" />
   </ItemGroup>
