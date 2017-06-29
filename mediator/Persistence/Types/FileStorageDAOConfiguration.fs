@@ -3,8 +3,8 @@ namespace Persistence.Types
 type GCPStorageDAOConfiguration = { ProjectId: string; BucketId: string; }
 
 type FileStorageDAOConfiguration =
-  | GCPStorage of GCPStorageDAOConfiguration
+  | GCPStorageConfiguration of GCPStorageDAOConfiguration
 
 module FileStorageDAOConfiguration =
-  let create projectId bucketId =
+  let createGCPStorageConfig projectId bucketId =
     { ProjectId = projectId; BucketId = bucketId }

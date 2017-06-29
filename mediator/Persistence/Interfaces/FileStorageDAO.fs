@@ -11,13 +11,13 @@ type GCPFileStorageDAO(configuration : GCPStorageDAOConfiguration) =
   interface IFileStorageDAO with
     member this.Insert file =
       let db = GCPStorageContext.create configuration
-      GCPStorageContext.upload db file
+      GCPStorageContext.uploadAsync db file
       
 
 module FileStorageDAO =
-  let create (configuration : FileStorageDAOConfiguration) =
+  let create (config : FileStorageDAOConfiguration) =
     let implementation =
-      match configuration with
-        | GCPStorage config -> GCPFileStorageDAO(config)
+      match config with
+        | GCPStorageConfiguration c -> GCPFileStorageDAO(c)
     implementation :> IFileStorageDAO
      

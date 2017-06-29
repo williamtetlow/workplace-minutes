@@ -9,5 +9,5 @@ module GCPStorageContext =
   let create configuration =
    { Configuration = configuration }
 
-  let upload (context : GCPStorageContext) (file : UploadFile) =
+  let uploadAsync (context : GCPStorageContext) (file : UploadFile) =
     0
