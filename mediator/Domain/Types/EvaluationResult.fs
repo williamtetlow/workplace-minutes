@@ -2,7 +2,7 @@ namespace Domain.Types
 
 open Domain.Types
 
-type EvaluationResultType = { EvalutionProcess: EvaluationProcessType }
+type EvaluationResult = { EvalutionProcess: EvaluationProcess }
 
 module EvaluationResult =
   let create x =

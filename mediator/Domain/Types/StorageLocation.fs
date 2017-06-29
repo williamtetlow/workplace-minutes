@@ -2,10 +2,10 @@ namespace Domain.Types
 
 open System
 
-type GoogleCloudStorageLocationType = { ProjectName: string; BucketId: string; }
+type GoogleCloudStorageLocation = { ProjectName: string; BucketId: string; }
 
-type StorageLocationType =
-  | GoogleCloudStorageLocation of GoogleCloudStorageLocationType
+type StorageLocation =
+  | GoogleCloudStorageLocation of GoogleCloudStorageLocation
 
 module StorageLocation =
 

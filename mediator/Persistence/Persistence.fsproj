@@ -1,4 +1,4 @@
-<Project Sdk="FSharp.NET.Sdk;Microsoft.NET.Sdk" ToolsVersion="15.0">
+﻿<Project Sdk="FSharp.NET.Sdk;Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <Version>1.0.0-alpha</Version>
@@ -6,6 +6,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Types/*.fs" />
+    <Compile Include="Databases/*.fs"/>
     <Compile Include="Interfaces/*.fs" />
     <Compile Include="Library.fs" />
     <EmbeddedResource Include="**\*.resx" />
@@ -20,6 +21,9 @@
     <DotNetCliToolReference Include="dotnet-compile-fsc">
       <Version>1.0.0-preview2-020000</Version>
     </DotNetCliToolReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.fsproj" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

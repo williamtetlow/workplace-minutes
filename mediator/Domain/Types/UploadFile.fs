@@ -3,13 +3,13 @@ namespace Domain.Types
 open System
 open Domain.Types
 
-type AcceptedUploadFileType = 
+type AcceptedUploadFiles = 
   | AudioFileType
 
-type UploadFileType = { FileName: string; Type: AcceptedUploadFileType; SourceSystemUser: SourceSystemUserType }
+type UploadFile = { FileName: string; Type: AcceptedUploadFiles; SourceSystemUser: SourceSystemUser }
 
 // EVENTS
-type UploadFileReceivedEvent = { Timestamp: DateTime; UploadFile: UploadFileType }
+type UploadFileReceivedEvent = { Timestamp: DateTime; UploadFile: UploadFile }
 
 type UploadFileEvents =
   | UploadFileReceivedEvent

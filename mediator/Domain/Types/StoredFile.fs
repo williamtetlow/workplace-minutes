@@ -3,10 +3,10 @@ namespace Domain.Types
 open System
 open Domain.Types
 
-type StoredFile = { UploadFile: UploadFileType; StorageLocation: StorageLocationType }
+type StoredFile = { UploadFile: UploadFile; StorageLocation: StorageLocation }
 
 // EVENTS
-type FileStoredEvent = { Timestamp: DateTime; File: UploadFileType; StorageLocation: StorageLocationType }
+type FileStoredEvent = { Timestamp: DateTime; File: UploadFile; StorageLocation: StorageLocation }
 
 type FileStoredEvents =
   | FileStoredEvent

@@ -1,8 +1,8 @@
 namespace Domain.Types
 
-type FileTypeType = { ContentType: string }
+type FileType = { ContentType: string }
 
-type AudioFileType = FileTypeType
+type AudioFileType = FileType
 
 module FileType = 
 

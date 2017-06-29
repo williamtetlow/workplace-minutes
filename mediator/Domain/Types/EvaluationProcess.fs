@@ -1,6 +1,6 @@
 namespace Domain.Types
 
-type EvaluationProcessType = { Name: string }
+type EvaluationProcess = { Name: string }
 
 module EvalutionProcess =
   let create x = 

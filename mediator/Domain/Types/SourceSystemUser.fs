@@ -1,6 +1,6 @@
 namespace Domain.Types
 
-type SourceSystemUserType = { Username: string; SourceSystemId: string }
+type SourceSystemUser = { Username: string; SourceSystemId: string }
 
 module SourceSystemUser =
   let create userName sourceSystemId =
