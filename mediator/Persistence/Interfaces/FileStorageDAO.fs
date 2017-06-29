@@ -16,7 +16,8 @@ type GCPFileStorageDAO(configuration : GCPStorageDAOConfiguration) =
 
 module FileStorageDAO =
   let create (configuration : FileStorageDAOConfiguration) =
-    match configuration with
-     | GCPStorage config -> GCPFileStorageDAO(config) :> IFileStorageDAO
-  
+    let implementation =
+      match configuration with
+        | GCPStorage config -> GCPFileStorageDAO(config)
+    implementation :> IFileStorageDAO
      
