@@ -6,6 +6,9 @@ type AudioFileType = FileType
 
 module FileType = 
 
+  let getContentType fileType =
+    fileType.ContentType
+
   module AudioFileType =
     let create : AudioFileType =
       { ContentType = "audio" }
