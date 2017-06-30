@@ -9,6 +9,8 @@ open Microsoft.AspNetCore.Mvc
 open Microsoft.AspNetCore.Http
 open Service.FileUpload
 open Persistence.Interfaces
+open mediator.Types
+open mediator.Functions
 
 [<Route("api/audio-file-upload")>]
 type AudioFileUploadController(fileStorageDAO : IFileStorageDAO) = 
@@ -16,17 +18,10 @@ type AudioFileUploadController(fileStorageDAO : IFileStorageDAO) =
 
     // POST api/audio-file-upload
     [<HttpPost>]
-    member this.Post([<FromBody>] file : IFormFile) =
-      let uploadFileAsync (fileToUpload : IFormFile) path =
-        fileToUpload.CopyToAsync(path)
+    member this.Post([<FromBody>] fileUpload : FileUploadModel) = async {
+      let uploadFile = Mappings.FileUploadModelToUploadFile fileUpload
 
-      let fileType = { file = file }
+      let! result = fileStorageDAO.Insert uploadFile
 
-      let shouldProceedWithUpload = 
-        fileType.IsAudioFile && file.Length > int64 0
-
-      let operation = 
-        match shouldProceedWithUpload with
-          | true -> Some(uploadFileAsync file)
-          | false -> None
-      0
+      return this.Ok(result) :> IActionResult
+    }

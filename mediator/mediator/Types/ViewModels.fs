@@ -4,4 +4,5 @@ open System
 open System.IO
 open Microsoft.AspNetCore.Http
 
-type FileUploadModel = { SourceSystemUser: string; File: IFormFile }
+type SourceSystemUserModel = { Username: string; SourceSystemId: string }
+type FileUploadModel = { SourceSystemUser: SourceSystemUserModel; File: IFormFile }
