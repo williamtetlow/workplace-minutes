@@ -29,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="../Service/Service.fsproj" />
     <ProjectReference Include="../Domain/Domain.fsproj" />
+    <ProjectReference Include="../Persistence/Persistence.fsproj" />
   </ItemGroup>
   <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>

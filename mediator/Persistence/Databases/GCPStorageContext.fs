@@ -1,11 +1,13 @@
 namespace Persistence.Databases
 
+open System.IO
 open Persistence.Types
 open Persistence.Types.FileStorageDAOConfiguration
 open Domain.Types
 open Google.Cloud.Storage.V1
 open Google.Apis.Storage.v1
 open Google.Apis.Storage.v1.Data
+
 
 type GCPStorageContext = { Configuration: GCPStorageDAOConfiguration }
 
@@ -16,15 +18,17 @@ module GCPStorageContext =
   let private createClientAsync = async {
     return! Async.AwaitTask (StorageClient.CreateAsync())
   }
-
   let private uploadToStorageAsync  config file (client: StorageClient) = async {
-    let bucketName = GCPStorageConfig.getBucketName config
+    let liftUploadParams =
+      fun file config -> (UploadFile.getFilename file, UploadFile.getFileType file, GCPStorageConfig.getBucketName config)
 
-    use fileStream = UploadFile.getFileStream file
-    let filename = UploadFile.getFilename file
-    let fileType = UploadFile.getFileType file
+    let liftFileStream =
+      fun file -> (UploadFile.getFileStream file)
     
-    return! Async.AwaitTask(client.UploadObjectAsync(bucketName, filename, fileType, fileStream))
+    use fileStream = liftFileStream file
+    let filename, fileType, bucketName = liftUploadParams file config
+      
+    return! Async.AwaitTask (client.UploadObjectAsync(bucketName, filename, fileType, fileStream))
   }
 
   let uploadAsync (context : GCPStorageContext) (file : UploadFile) = async {
@@ -33,6 +37,5 @@ module GCPStorageContext =
         |> Async.RunSynchronously
         |> uploadToStorageAsync context.Configuration file
 
-      return 1
-
+      return uploadResult.Id
   }

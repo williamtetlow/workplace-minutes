@@ -8,9 +8,10 @@ open System.IO
 open Microsoft.AspNetCore.Mvc
 open Microsoft.AspNetCore.Http
 open Service.FileUpload
+open Persistence.Interfaces
 
 [<Route("api/audio-file-upload")>]
-type AudioFileUploadController() = 
+type AudioFileUploadController(fileStorageDAO : IFileStorageDAO) = 
   inherit Controller()
 
     // POST api/audio-file-upload

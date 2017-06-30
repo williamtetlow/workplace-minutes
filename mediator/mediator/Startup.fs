@@ -10,6 +10,8 @@ open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Logging
 open mediator.Types.CommonTypes
+open Persistence.Types
+open Persistence.Interfaces
 
 type Startup (env:IHostingEnvironment)=
 
@@ -31,6 +33,14 @@ type Startup (env:IHostingEnvironment)=
         
         // Add framework services.
         services.AddMvc() |> ignore
+
+        // Dependency Injection
+        let fileStorageDAO = 
+          FileStorageDAOConfiguration.createGCPStorageConfig "workplace-minutes" "minutes-audio-recordings"
+          |> FileStorageDAO.create
+
+        services.AddSingleton(fileStorageDAO) |> ignore
+        
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     member this.Configure(app:IApplicationBuilder, env:IHostingEnvironment, loggerFactory: ILoggerFactory) =

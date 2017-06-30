@@ -1,17 +1,20 @@
 namespace Persistence.Interfaces
 
+open System
 open Domain.Types
 open Persistence.Types
 open Persistence.Databases
+open Persistence.Databases.GCPStorageContext
 
 type IFileStorageDAO =
-  abstract Insert : UploadFile -> int
+  abstract Insert : UploadFile -> Async<string>
 
 type GCPFileStorageDAO(configuration : GCPStorageDAOConfiguration) =
   interface IFileStorageDAO with
-    member this.Insert file =
+    member this.Insert file = async {
       let db = GCPStorageContext.create configuration
-      GCPStorageContext.uploadAsync db file
+      return! GCPStorageContext.uploadAsync db file
+    }
       
 
 module FileStorageDAO =

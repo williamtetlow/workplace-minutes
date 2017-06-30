@@ -6,8 +6,8 @@ type FileStorageDAOConfiguration =
   | GCPStorageConfiguration of GCPStorageDAOConfiguration
 
 module FileStorageDAOConfiguration =
-  let createGCPStorageConfig projectId bucketName =
-    { ProjectId = projectId; BucketName = bucketName }
+  let createGCPStorageConfig projectId bucketName : FileStorageDAOConfiguration =
+    GCPStorageConfiguration { ProjectId = projectId; BucketName = bucketName }
     
   module GCPStorageConfig =
     let getBucketName (config : GCPStorageDAOConfiguration) =
