@@ -11,7 +11,7 @@ module FileType =
 
   module AudioFileType =
     let create : AudioFileType =
-      { ContentType = "audio/mp3" }
+      { ContentType = "audio/mpeg" }
 
   let isAudioFile fileType =
     AudioFileType.create = fileType

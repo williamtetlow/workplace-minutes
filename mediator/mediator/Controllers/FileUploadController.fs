@@ -11,6 +11,7 @@ open Service.FileUpload
 open Persistence.Interfaces
 open mediator.Types
 open mediator.Functions
+open Domain.Types
 
 [<Route("api/file-upload")>]
 type FileUploadController(fileStorageDAO : IFileStorageDAO) = 
@@ -23,5 +24,18 @@ type FileUploadController(fileStorageDAO : IFileStorageDAO) =
 
       let! result = fileStorageDAO.Insert uploadFile
 
+      return this.Ok(result) :> IActionResult
+    }
+
+    [<HttpGet>]
+    member this.Get() = async {
+      let user = SourceSystemUser.create "Willie" "1"
+      use stream = File.OpenRead "/Users/william/Documents/Homework/workplace-minutes/mediator/mediator/TestFiles/Rick and Morty Season 3 Trai.textClipping"
+
+      let uploadFile =
+        UploadFile.create "test1" (AudioFile FileType.AudioFileType.create) user stream
+
+      let! result = fileStorageDAO.Insert uploadFile
+      
       return this.Ok(result) :> IActionResult
     }

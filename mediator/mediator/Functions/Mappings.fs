@@ -12,13 +12,15 @@ module Mappings =
 
   let FileUploadDTOToUploadFile (fileUploadModel : FileUploadDTO) =
     let { SourceSystemUser = sourceSystemUserDTO; File = file } = fileUploadModel
-    let filename = fun (file : IFormFile) -> file.FileName
-    let fileType = fun (file: IFormFile) -> AudioFile FileType.AudioFileType.create
+    let filename (file : IFormFile) = file.FileName
+    let fileType (file: IFormFile) = AudioFile FileType.AudioFileType.create
+    let sourceSystemUser sourceSystemUserDTO = 
+      SourceSystemUserDTOToSourceSystemUser sourceSystemUserDTO
     use stream = file.OpenReadStream()
 
     UploadFile.create
       (file |> filename)
       (file |> fileType)
-      (sourceSystemUserDTO |> SourceSystemUserDTOToSourceSystemUser)
+      (sourceSystemUserDTO |> sourceSystemUser)
       stream
 
