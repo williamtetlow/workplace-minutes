@@ -18,8 +18,8 @@ type AudioFileUploadController(fileStorageDAO : IFileStorageDAO) =
 
     // POST api/audio-file-upload
     [<HttpPost>]
-    member this.Post([<FromBody>] fileUpload : FileUploadModel) = async {
-      let uploadFile = Mappings.FileUploadModelToUploadFile fileUpload
+    member this.Post([<FromBody>] fileUpload : FileUploadDTO) = async {
+      let uploadFile = Mappings.FileUploadDTOToUploadFile fileUpload
 
       let! result = fileStorageDAO.Insert uploadFile
 
