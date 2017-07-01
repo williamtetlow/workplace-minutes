@@ -12,8 +12,8 @@ open Persistence.Interfaces
 open mediator.Types
 open mediator.Functions
 
-[<Route("api/audio-file-upload")>]
-type AudioFileUploadController(fileStorageDAO : IFileStorageDAO) = 
+[<Route("api/file-upload")>]
+type FileUploadController(fileStorageDAO : IFileStorageDAO) = 
   inherit Controller()
 
     // POST api/audio-file-upload
