@@ -12,14 +12,17 @@ open Persistence.Interfaces
 open mediator.Types
 open mediator.Functions
 open Domain.Types
+open Microsoft.Extensions.Logging
 
 [<Route("api/file-upload")>]
-type FileUploadController(fileStorageDAO : IFileStorageDAO) = 
+type FileUploadController(fileStorageDAO : IFileStorageDAO, loggerFactory : ILoggerFactory) = 
   inherit Controller()
+  let loggerName funcName = "FileUploadController." + funcName
+  let logger funcName = funcName |> loggerName |> loggerFactory.CreateLogger
 
     // POST api/audio-file-upload
-    [<HttpPost>]
-    member this.Post([<FromBody>] fileUpload : FileUploadDTO) = async {
+  [<HttpPost>]
+  member this.Post([<FromBody>] fileUpload : FileUploadDTO) = async {
       let uploadFile = Mappings.FileUploadDTOToUploadFile fileUpload
 
       let! result = fileStorageDAO.Insert uploadFile
@@ -27,15 +30,18 @@ type FileUploadController(fileStorageDAO : IFileStorageDAO) =
       return this.Ok(result) :> IActionResult
     }
 
-    [<HttpGet>]
-    member this.Get() = async {
-      let user = SourceSystemUser.create "Willie" "1"
-      use stream = File.OpenRead "/Users/william/Documents/Homework/workplace-minutes/mediator/mediator/TestFiles/Rick and Morty Season 3 Trai.textClipping"
+  [<HttpGet>]
+  member this.Get() = 
+    async {
+      let logger = logger "Get"
+      logger.LogDebug "In get method" |> ignore
+      // let user = SourceSystemUser.create "Willie" "1"
+      // use stream = File.OpenRead "/Users/william/Documents/Homework/workplace-minutes/mediator/mediator/TestFiles/Rick and Morty Season 3 Trai.textClipping"
 
-      let uploadFile =
-        UploadFile.create "test1" (AudioFile FileType.AudioFileType.create) user stream
+      // let uploadFile =
+      //   UploadFile.create "test1" (AudioFile FileType.AudioFileType.create) user stream
 
-      let! result = fileStorageDAO.Insert uploadFile
+      // let! result = fileStorageDAO.Insert uploadFile
       
-      return this.Ok(result) :> IActionResult
-    }
+      return this.Ok("Yes") :> IActionResult
+    } |> Async.StartAsTask

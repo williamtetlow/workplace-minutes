@@ -25,6 +25,7 @@ type Startup (env:IHostingEnvironment)=
 
     // This method gets called by the runtime. Use this method to add services to the container.
     member this.ConfigureServices (services:IServiceCollection) =
+        services.AddLogging() |> ignore
         // Adds services required for options
         services.AddOptions() |> ignore
 
@@ -47,7 +48,7 @@ type Startup (env:IHostingEnvironment)=
     
         loggerFactory
             .AddConsole(configuration.GetSection("Logging"))
-            .AddDebug()
+            .AddDebug(LogLevel.Trace)
             |> ignore
 
         app.UseMvc() |> ignore    
