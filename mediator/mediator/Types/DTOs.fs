@@ -4,5 +4,12 @@ open System
 open System.IO
 open Microsoft.AspNetCore.Http
 
-type SourceSystemUserDTO = { Username: string; SourceSystemId: string }
-type FileUploadDTO = { SourceSystemUser: SourceSystemUserDTO; File: IFormFile }
+[<AllowNullLiteralAttribute>]
+type SourceSystemUserDTO() =
+  member val Username : string = null with get, set
+  member val SourceSystemId : string = null with get, set
+
+[<AllowNullLiteralAttribute>]
+type FileUploadDTO() =
+  member val SourceSystemUser : SourceSystemUserDTO = null with get, set
+  member val File : IFormFile = null with get, set

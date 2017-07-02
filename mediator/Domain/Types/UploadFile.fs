@@ -10,7 +10,7 @@ type AcceptedUploadFiles =
 type UploadFile = { 
   FileName: string;
   Type: AcceptedUploadFiles;
-  SourceSystemUser:SourceSystemUser;
+  SourceSystemUser: SourceSystemUser;
   Stream: Stream
 }
 
@@ -33,4 +33,7 @@ module UploadFile =
   let getFileType uploadFile =
     match uploadFile.Type with
       | AudioFile audioFile -> FileType.getContentType audioFile
-      
+
+  module AcceptedUploadFiles =
+    let test fileType =
+     fileType |> FileType.isAudioFile
