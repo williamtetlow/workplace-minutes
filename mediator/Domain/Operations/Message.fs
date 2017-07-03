@@ -5,5 +5,6 @@ type Message =
   | FileUploaded
   | FileUploadFail
   // ERRORS
+  | NullProperty
   | FileUploadDTOIsNull
   | InvalidFileType

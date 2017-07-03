@@ -12,6 +12,8 @@ open Persistence.Interfaces
 open mediator.Types
 open mediator.Functions
 open Domain.Types
+open Domain.Operations
+open Domain.Operations.OperationResult
 open Microsoft.Extensions.Logging
 
 [<Route("api/file-upload")>]
@@ -22,13 +24,16 @@ type FileUploadController(fileStorageDAO : IFileStorageDAO, loggerFactory : ILog
 
     // POST api/audio-file-upload
   [<HttpPost>]
-  member this.Post([<FromBody>] fileUpload : FileUploadDTO) = async {
-      let uploadFile = Mappings.FileUploadDTOToUploadFile fileUpload
-
-      let! result = fileStorageDAO.Insert uploadFile
+  member this.Post([<FromBody>] fileUpload : FileUploadDTO) =
+    async {
+      let result =
+        success fileUpload
+        >>= Mappings.FileUploadDTOToUploadFile
+        >>= switchAwait fileStorageDAO.Insert
 
       return this.Ok(result) :> IActionResult
-    }
+      
+    } |> Async.StartAsTask
 
   [<HttpGet>]
   member this.Get() = 

@@ -15,37 +15,38 @@ module Mappings =
 
   let SourceSystemUserDTOToSourceSystemUser (dto : SourceSystemUserDTO) =
     let mapToDomain (dto : SourceSystemUserDTO) =
-      let username = fun dto -> dto.Username
-      let sourceSystemId = fun dto -> dto.SourceSystemId
-      SourceSystemUser.create sourceSystemUserModel.Username sourceSystemUserModel.SourceSystemId
+      let username =
+        SourceSystemUser.newUsername dto.Username
+      let sourceSystemId =
+        SourceSystemUser.newSourceSystemId dto.SourceSystemId
+      
+      SourceSystemUser.create
+        <!> username
+        <*> sourceSystemId
+
     dto
     |> nullCheck
-    >>= 
-    //  
+    >>= mapToDomain 
 
-  let FileUploadDTOToUploadFile (fileUploadModel : FileUploadDTO) =
+  let FileUploadDTOToUploadFile (dto : FileUploadDTO) =
     let mapToDomain (dto : FileUploadDTO) =
-      let filename = dto.File.FileName
-      let fileType = { ContentType = dto.File.ContentType }
-      let sourceSystemUser = SourceSystemUserDTOToSourceSystemUser dto.SourceSystemUser
+      let filename =
+        UploadFile.newFilename dto.File.FileName
+      let fileType =
+        FileType.create dto.File.ContentType
+      let sourceSystemUser =
+        SourceSystemUserDTOToSourceSystemUser dto.SourceSystemUser
+      let fileStream =
+        use stream = dto.File.OpenReadStream()
+        success stream
+      
+      UploadFile.create
+        <!> filename
+        <*> fileType
+        <*> sourceSystemUser
+        <*> fileStream
 
-
-
-    let canContinue dto =
-      dto
-      |> nullCheck
-      >>= Validate.FileUploadDTO
-    
-    let { SourceSystemUser = sourceSystemUserDTO; File = file } = fileUploadModel
-    let filename (file : IFormFile) = file.FileName
-    let fileType (file: IFormFile) = AudioFile FileType.AudioFileType.create
-    let sourceSystemUser sourceSystemUserDTO = 
-       sourceSystemUserDTO
-    use stream = file.OpenReadStream()
-
-    UploadFile.create
-      (file |> filename)
-      (file |> fileType)
-      (sourceSystemUserDTO |> sourceSystemUser)
-      stream
+    dto
+    |> nullCheck
+    >>= mapToDomain
 

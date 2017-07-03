@@ -10,12 +10,4 @@ open Domain.Types.UploadFile
 
 module Validate =
   let FileUploadDTO (dto : FileUploadDTO) =
-    let acceptedFileType ( dto : FileUploadDTO) =
-      let acceptedType =
-        { ContentType = dto.File.ContentType }
-        |> AcceptedUploadFiles.test
-      match acceptedType with
-        | true -> success dto
-        | false -> fail InvalidFileType
-    
-    dto |> acceptedFileType
+    1

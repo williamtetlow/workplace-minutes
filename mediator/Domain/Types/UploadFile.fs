@@ -3,9 +3,8 @@ namespace Domain.Types
 open System
 open System.IO
 open Domain.Types
-
-type AcceptedUploadFiles = 
-  | AudioFile of AudioFileType
+open Domain.Operations
+open Domain.Operations.OperationResult
 
 type UploadFile = { 
   FileName: string;
@@ -24,6 +23,11 @@ module UploadFile =
   let create fileName fileType sourceSystemUser stream =
     { FileName = fileName; Type = fileType; SourceSystemUser = sourceSystemUser; Stream = stream }
 
+  let newFilename filename =
+    match filename with
+      | null -> fail NullProperty
+      | _ -> success filename
+
   let getFileStream uploadFile =
     uploadFile.Stream
 
@@ -33,7 +37,3 @@ module UploadFile =
   let getFileType uploadFile =
     match uploadFile.Type with
       | AudioFile audioFile -> FileType.getContentType audioFile
-
-  module AcceptedUploadFiles =
-    let test fileType =
-     fileType |> FileType.isAudioFile
