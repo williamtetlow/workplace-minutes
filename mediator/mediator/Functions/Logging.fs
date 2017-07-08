@@ -4,6 +4,10 @@ open Microsoft.Extensions.Logging
 
 module Logging =
 
+  let newTypeLogger (loggerFactory : ILoggerFactory) typeName funcName =
+    let loggerName = typeName + "." + funcName
+    loggerName |> loggerFactory.CreateLogger
+
   let logSuccess (logger : ILogger) format result =
     let log result = logger.LogInformation (format, [|result|])
     result
