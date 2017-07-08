@@ -49,4 +49,3 @@ module Mappings =
     dto
     |> nullCheck
     >>= mapToDomain
-

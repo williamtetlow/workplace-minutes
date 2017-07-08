@@ -11,6 +11,7 @@ open Service.FileUpload
 open Persistence.Interfaces
 open mediator.Types
 open mediator.Functions
+open mediator.Functions.Common
 open Domain.Types
 open Domain.Operations
 open Domain.Operations.OperationResult
@@ -26,13 +27,16 @@ type FileUploadController(fileStorageDAO : IFileStorageDAO, loggerFactory : ILog
   [<HttpPost>]
   member this.Post([<FromBody>] fileUpload : FileUploadDTO) =
     async {
-      let result =
+      let logger = logger "POST"
+      return
         success fileUpload
+        |> Logging.logSuccess logger "POST received {0}"
         >>= Mappings.FileUploadDTOToUploadFile
         >>= switchAwait fileStorageDAO.Insert
+        |> Logging.logFailure logger
+        |> OKOnSuccess
+        |> MapToHttpResponse
 
-      return this.Ok(result) :> IActionResult
-      
     } |> Async.StartAsTask
 
   [<HttpGet>]

@@ -5,8 +5,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Types/*.fs" />
+    <Compile Include="Functions/Common.fs" />
     <Compile Include="Functions/Validate.fs" />
     <Compile Include="Functions/Mappings.fs" />
+    <Compile Include="Functions/Logging.fs" />
     <Compile Include="Controllers/*.fs" />
     <Compile Include="Startup.fs" />
     <Compile Include="Program.fs" />

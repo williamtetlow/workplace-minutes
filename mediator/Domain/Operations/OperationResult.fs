@@ -65,3 +65,25 @@ module OperationResult =
 
   let switchAwait func result =
      Async.RunSynchronously (func result) |> success
+
+  let callOnSuccess func result =
+    let fSuccess (x, msgs) =
+      func (x, msgs)
+      Success (x, msgs)
+    let fFailure errs = Failure errs
+    either fSuccess fFailure result 
+  
+  let callOnFailure func result =
+    let fSuccess (x, msgs) = Success (x, msgs)
+    let fFailure errs =
+      func (errs)
+      Failure errs
+    either fSuccess fFailure result
+
+  /// given a result, in the success case, return the value.
+  /// In the failure case, determine the value to return by 
+  /// applying a function to the errors in the failure case
+  let valueOrDefault f result = 
+    match result with 
+    | Success (x,_) -> x
+    | Failure errors -> f errors
