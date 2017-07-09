@@ -26,13 +26,12 @@ type FileUploadController(fileStorageDAO : IFileStorageDAO, loggerFactory : ILog
     async {
       let logger = this.LoggerForAction "Post"
 
-      return
-        success fileUpload
-        |> Logging.logSuccess logger "POST received {0}"
+      let operation result =
+        result
         >>= Mappings.FileUploadDTOToUploadFile
         >>= switchAwait fileStorageDAO.Insert
-        |> Logging.logFailure logger
-        |> OKOnSuccess
-        |> MapToHttpResponse
+
+      return
+        this.PerformOperation logger operation (fileUpload |> success)
     
     } |> Async.StartAsTask

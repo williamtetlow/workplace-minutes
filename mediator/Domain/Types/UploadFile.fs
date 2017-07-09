@@ -8,7 +8,7 @@ open Domain.Operations.OperationResult
 
 type UploadFile = { 
   FileName: string;
-  Type: AcceptedUploadFiles;
+  Type: AcceptedFileType;
   SourceSystemUser: SourceSystemUser;
   Stream: Stream
 }

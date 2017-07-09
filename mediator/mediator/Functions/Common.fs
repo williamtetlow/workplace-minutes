@@ -49,5 +49,5 @@ module Common =
       | DomainEvent msg
         -> upcast ObjectResult(msg)
 
-  let MapToHttpResponse result =
+  let MapMessagesToHttpResponse result =
     result |> valueOrDefault mapToHttpResponse
