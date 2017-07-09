@@ -1,0 +1,11 @@
+kind: Service  
+apiVersion: v1  
+metadata:  
+  name: "mediator"
+spec:  
+  selector:
+    app: "mediator"
+  ports:
+    - protocol: "TCP"
+      port: 80
+      targetPort: 5000

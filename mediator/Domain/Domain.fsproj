@@ -1,0 +1,35 @@
+<Project Sdk="FSharp.NET.Sdk;Microsoft.NET.Sdk" ToolsVersion="15.0">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <Version>1.0.0-alpha</Version>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Operations/*.fs" />
+    <Compile Include="Types/FileType.fs"/>
+    <Compile Include="Types/SourceSystemUser.fs" />
+    <Compile Include="Types/UploadFile.fs"/>
+    <Compile Include="Types/StorageLocation.fs"/>
+    <Compile Include="Types/StoredFile.fs" />
+    <Compile Include="Types/EvaluationProcess.fs" />
+    <Compile Include="Types/EvaluationResult.fs" />
+    <Compile Include="Functions/*.fs" />
+    <EmbeddedResource Include="**\*.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FSharp.NET.Sdk" Version="1.0.3" PrivateAssets="All">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.FSharp.Core.netcore" Version="1.0.0-alpha-161023" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="dotnet-compile-fsc">
+      <Version>1.0.0-preview2-020000</Version>
+    </DotNetCliToolReference>
+  </ItemGroup>
+
+</Project>
