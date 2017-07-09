@@ -19,6 +19,9 @@ let main argv =
                     .UseConfiguration(config)
                     .UseKestrel()
                     .UseContentRoot(Directory.GetCurrentDirectory())
+                    // listen on port 5000 on all network interfaces
+                    // see http://blog.scottlogic.com/2016/09/05/hosting-netcore-on-linux-with-docker.html
+                    .UseUrls("http://*:5000") 
                     .UseIISIntegration()
                     .UseStartup<Startup>()
                     .Build()

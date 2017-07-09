@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1  
+kind: Deployment  
+metadata:  
+  name: mediator
+spec:  
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: mediator
+        track: stable
+    spec:
+      containers:
+        - name: mediator
+          image: "willietetlow/mediator:v0.0"
+          args: ["--ip", "0.0.0.0"]
+          ports:
+            - name: http
+              containerPort: 5000
