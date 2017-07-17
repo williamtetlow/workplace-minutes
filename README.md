@@ -1,2 +1,2 @@
 # workplace-minutes
-ML Club Workplace Team -test
+ML Club Workplace Team
