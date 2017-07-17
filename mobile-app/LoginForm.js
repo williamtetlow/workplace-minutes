@@ -12,6 +12,8 @@ import {
 } from 'react-native-elements'
 
 export default class LoginForm extends Component {
+  _onPressLogin() {
+  }
   render() {
     return (
         <View style={styles.container}>
@@ -19,7 +21,9 @@ export default class LoginForm extends Component {
             <FormInput/>
             <FormLabel>Password</FormLabel>
             <FormInput secureTextEntry={true}/>
-            <Button title='Login' />
+            <Button 
+                title='Login'
+                onPress={() => this._onPressLogin()} />
         </View>
     );
   }
