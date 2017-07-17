@@ -11,7 +11,7 @@ import {
   Button 
 } from 'react-native-elements'
 
-export default class LoginForm extends Component {
+export default class Login extends Component {
   _onPressLogin() {
   }
   render() {

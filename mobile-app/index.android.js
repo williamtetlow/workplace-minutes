@@ -2,13 +2,20 @@ import React, { Component } from 'react';
 import {
   AppRegistry
 } from 'react-native';
-import LoginForm from './LoginForm';
+import {
+  StackNavigator,
+} from 'react-navigation';
+import Login from './Login';
+import Record from './Record';
 
 export default class WorkplaceMobile extends Component {
   render() {
-    return (
-      <LoginForm/>
-    );
+    let activeView = <Login/>;
+    const isLoggedIn = true;//this.state.isLoggedIn;
+    if (isLoggedIn) {
+      activeView = <Record/>;
+    }
+    return (activeView);
   }
 }
 
