@@ -18,6 +18,7 @@ import {
 	AudioRecorder, 
 	AudioUtils
 } from 'react-native-audio';
+import UploadRecording from './UploadRecording';
 
 export default class Record extends Component {
 	state = {
@@ -57,7 +58,12 @@ export default class Record extends Component {
 	}
 
 	_finishRecording(didSucceed, filePath) {
-		this.setState({ finished: didSucceed });
+		const recordingSize = 0;
+		this.setState({ 
+			finished: didSucceed,
+			recordingLength: this.state.timeRecorded,
+			recordingSize: recordingSize
+		 });
 		console.log(`Finished recording of duration ${this.state.timeRecorded} seconds at path: ${filePath}`);
 	}
 
@@ -127,18 +133,26 @@ export default class Record extends Component {
 	}
 
   render() {
+		if(!this.state.finished) {
+			return (
+				<View style={styles.container}>
+					<Text
+						style={styles.timeRecordedText}>
+							{this.state.timeRecorded}s
+					</Text>
+					<Button
+						buttonStyle={styles.recordButton}
+						large
+						title={!this.state.recording ? 'Start Recording' : 'Complete Recording'}
+						onPress={() => !this.state.recording ? this._record() : this._stopRecording()} />
+				</View>
+			);
+		}
     return (
-			<View style={styles.container}>
-				<Text
-					style={styles.timeRecordedText}>
-						{this.state.timeRecorded}s
-				</Text>
-				<Button
-					buttonStyle={styles.recordButton}
-					large
-					title={!this.state.recording ? 'Start Recording' : 'Complete Recording'}
-					onPress={() => !this.state.recording ? this._record() : this._stopRecording()} />
-			</View>
+			<UploadRecording
+				recordingPath={this.state.audioPath}
+				recordingLength={this.state.recordingLength}
+				recordingSize={this.state.recordingSize}/>
     );
   }
 }
