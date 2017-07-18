@@ -12,22 +12,36 @@ import {
   FormInput, 
   Button 
 } from 'react-native-elements'
+import firebase from './firebase';
 
 export default class UploadRecording extends Component {
 	state = {
-		isUploading: false,
-		uploadProgress: 0
+		uploading: false,
+		uploadProgress: 'N/A'
 	};
 
-	constructor(props) {
-		super(props);
-		this.state = {}
-	}
+	_uploadRecording(filePath) {
+		this.setState({uploading: true});
 
-	_uploadRecording() {
-		//insert log into firebase and then stash file into storage with this id
+		const filename = `recordings/${new Date().getTime()}`;
+		const unsubscribe = firebase.storage()
+			.ref(filename)
+			.putFile(filePath)
+			.on('state_changed', 
+				snapshot => {
+					this.setState({uploadProgress: `${snapshot.bytesTransferred} / ${snapshot.totalBytes}`});
+					console.log(snapshot);
+				}, 
+				err => {
+						console.error(err);
+						unsubscribe();
+				}, 
+				uploadedFile => {
+						console.log(uploadedFile);
+						this.setState({uploadProgress: `Completed (${filename})`});
+						unsubscribe();
+				});
 	}
-
 
   render() {
 		const recordingPath = this.props.recordingPath;
@@ -36,7 +50,7 @@ export default class UploadRecording extends Component {
 				<Text>
 					Length: {this.props.recordingLength} Size: {this.props.recordingSize}
 				</Text>
-				{this.state.isUploading &&
+				{this.state.uploading &&
 					<Text>
 						Progress: {this.state.uploadProgress}
 					</Text>
@@ -45,7 +59,7 @@ export default class UploadRecording extends Component {
 					buttonStyle={styles.uploadButton}
 					large
 					title='Upload'
-					onPress={() => this._uploadRecording()} />
+					onPress={() => this._uploadRecording(this.props.recordingPath)} />
 			</View>
     );
   }

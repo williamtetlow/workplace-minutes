@@ -11,6 +11,7 @@
 		"react-native": "0.46.3",
 		"react-native-audio": "^3.2.2",
 		"react-native-elements": "^0.14.0",
+		"react-native-firebase": "^2.0.3",
 		"react-native-vector-icons": "^4.2.0",
 		"react-navigation": "^1.0.0-beta.11"
 	},
