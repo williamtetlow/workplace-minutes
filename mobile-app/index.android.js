@@ -4,15 +4,22 @@ import {
 } from 'react-native';
 import Login from './Login';
 import Record from './Record';
+import RecordingHistory from './RecordingHistory';
+import ScrollableTabView, {DefaultTabBar } from 'react-native-scrollable-tab-view';
 
 export default class WorkplaceMobile extends Component {
   render() {
-    let activeView = <Login/>;
     const isLoggedIn = true;//this.state.isLoggedIn;
     if (isLoggedIn) {
-      activeView = <Record/>;
+      return (
+        <ScrollableTabView
+          renderTabBar={() => <DefaultTabBar />}>
+          <Record tabLabel='Record'/>
+          <RecordingHistory tabLabel='History'/>
+        </ScrollableTabView>
+      );
     }
-    return (activeView);
+    return (<Login/>);
   }
 }
 

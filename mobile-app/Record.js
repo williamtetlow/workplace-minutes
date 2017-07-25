@@ -143,6 +143,7 @@ export default class Record extends Component {
 					<Button
 						buttonStyle={styles.recordButton}
 						large
+						color="red"
 						title={!this.state.recording ? 'Start Recording' : 'Complete Recording'}
 						onPress={() => !this.state.recording ? this._record() : this._stopRecording()} />
 				</View>
@@ -169,8 +170,11 @@ const styles = StyleSheet.create({
 		fontSize: 60
   },
   recordButton: {
-		borderRadius: 10,
-		backgroundColor: 'red',
-		marginTop: 40
+	  borderColor:"red",
+		borderRadius: 3,
+		backgroundColor: 'white',
+		marginTop: 40,
+		borderWidth: 1
+		
   }
 });
