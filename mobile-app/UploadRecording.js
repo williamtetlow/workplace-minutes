@@ -20,6 +20,10 @@ export default class UploadRecording extends Component {
 		uploadProgress: 'N/A'
 	};
 
+	_discardRecording() {
+		
+	}
+	
 	_uploadRecording(filePath) {
 		this.setState({uploading: true});
 
@@ -47,6 +51,8 @@ export default class UploadRecording extends Component {
 		const recordingPath = this.props.recordingPath;
     return (
 			<View style={styles.container}>
+				<FormLabel>Title</FormLabel>
+				<FormInput/>
 				<Text>
 					Length: {this.props.recordingLength} Size: {this.props.recordingSize}
 				</Text>
@@ -55,11 +61,22 @@ export default class UploadRecording extends Component {
 						Progress: {this.state.uploadProgress}
 					</Text>
 				}
+				<View style={styles.buttonContainer}>
+				<Button
+					buttonStyle={styles.discardButton}
+					large
+					icon={{name: 'delete-forever', color: '#E83151'}}
+					color="#E83151"
+					title='Discard'
+					onPress={() => this._discardRecording()} />
 				<Button
 					buttonStyle={styles.uploadButton}
 					large
+					icon={{name: 'file-upload', color: '#387780'}}
+					color="#387780"
 					title='Upload'
 					onPress={() => this._uploadRecording(this.props.recordingPath)} />
+					</View>
 			</View>
     );
   }
@@ -69,12 +86,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
+    alignItems: 'stretch',
+    backgroundColor: '#FFFFFF',
+	},
+	buttonContainer: {
+		flex: 2,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'stretch'
+	},
   uploadButton: {
-		borderRadius: 10,
-		backgroundColor: 'red',
+		borderRadius: 3,
+		borderWidth: 3,
+		borderColor: "#387780",
+		backgroundColor: 'white',
+		marginTop: 40
+	},
+	discardButton: {
+		borderRadius: 3,
+		borderWidth: 3,
+		borderColor: "#E83151",
+		backgroundColor: 'white',
 		marginTop: 40
   }
 });

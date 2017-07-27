@@ -15,10 +15,48 @@ import firebase from './firebase';
 import Record from './Record';
 
 export default class RecordingHistory extends Component {
+  constructor() {
+    super();
+    this.ref = null;
+  }
+
+  state = {
+    recordings: []
+  };
+
+  componentDidMount() {
+    const self = this;
+    this.ref = firebase.database().ref('recordings');
+    this.ref.on('value', function(snapshot) {
+      console.log(snapshot);
+      var items = [];
+      snapshot.forEach((child) => {
+        items.push({
+          description: child.val().description,
+          _key: child.key
+        });
+      });
+
+      self.setState({ recordings: items });
+    });
+  }
+
+  componentWillUnmount() {
+    if (this.ref) {
+      this.ref.off('value');
+    }
+  }
 
   render() {
     return (    
     <List>
+        {
+    this.state.recordings.map((l, i) => (
+      <ListItem
+        title={l.description}
+      />
+    ))
+  }
       <ListItem
         title='My First Meeting'
         subtitle={

@@ -5,7 +5,7 @@ import {
 import Login from './Login';
 import Record from './Record';
 import RecordingHistory from './RecordingHistory';
-import ScrollableTabView, {DefaultTabBar } from 'react-native-scrollable-tab-view';
+import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view';
 
 export default class WorkplaceMobile extends Component {
   render() {

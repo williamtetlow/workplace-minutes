@@ -12,7 +12,8 @@ import {
 import { 
   FormLabel, 
   FormInput, 
-  Button 
+  Button,
+  Icon
 } from 'react-native-elements'
 import {
 	AudioRecorder, 
@@ -65,6 +66,22 @@ export default class Record extends Component {
 			recordingSize: recordingSize
 		 });
 		console.log(`Finished recording of duration ${this.state.timeRecorded} seconds at path: ${filePath}`);
+	}
+
+	_secondsRecordedToFormattedTime(secondsRecorded){
+		var hours   = Math.floor(secondsRecorded / 3600);
+		var minutes = Math.floor((secondsRecorded - (hours * 3600)) / 60);
+		var seconds = secondsRecorded - (hours * 3600) - (minutes * 60);
+		
+		if (minutes < 10) {minutes = "0"+minutes;}
+		if (seconds < 10) {seconds = "0"+seconds;}
+
+		if(hours > 0){
+			if (hours   < 10) {hours   = "0"+hours;}
+			return hours+':'+minutes+':'+seconds;
+		} else {
+			return minutes+':'+seconds;
+		}
 	}
 
 	async _stopRecording() {
@@ -134,16 +151,19 @@ export default class Record extends Component {
 
   render() {
 		if(!this.state.finished) {
+			const timeLabel = this._secondsRecordedToFormattedTime(this.state.timeRecorded);
+			
 			return (
 				<View style={styles.container}>
 					<Text
 						style={styles.timeRecordedText}>
-							{this.state.timeRecorded}s
+							{timeLabel}
 					</Text>
 					<Button
+						icon={{name: !this.state.recording ? 'record-voice-over' : 'done', color: '#387780'}}
 						buttonStyle={styles.recordButton}
 						large
-						color="red"
+						color="#387780"
 						title={!this.state.recording ? 'Start Recording' : 'Complete Recording'}
 						onPress={() => !this.state.recording ? this._record() : this._stopRecording()} />
 				</View>
@@ -163,18 +183,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#FFFFFF',
   },
   timeRecordedText: {
 		color: 'black',
 		fontSize: 60
   },
   recordButton: {
-	  borderColor:"red",
+	  borderColor:"#387780",
 		borderRadius: 3,
-		backgroundColor: 'white',
+		backgroundColor: '#FFFFFF',
 		marginTop: 40,
-		borderWidth: 1
+		borderWidth: 3
 		
   }
 });
