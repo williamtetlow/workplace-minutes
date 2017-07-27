@@ -1,11 +1,13 @@
+const pubsub = require('@google-cloud/pubsub')();
+
 /**
  * Background Cloud Function to be triggered by Cloud Storage when a file is uploaded.
- * To deploy: gcloud beta functions deploy helloGCS --stage-bucket [YOUR_STAGING_BUCKET_NAME] --trigger-bucket [YOUR_UPLOAD_BUCKET_NAME]
+ * To deploy: gcloud beta functions deploy fileUploadCloudStorageTrigger --stage-bucket workplace-cloud-functions-staging --trigger-bucket workplace-3d1d6.appspot.com
  *
  * @param {object} event The Cloud Functions event.
  * @param {function} callback The callback function.
  */
-exports.helloGCS = function (event, callback) {
+exports.fileUploadCloudStorageTrigger = function (event, callback) {
   const file = event.data;
 
   if (file.resourceState === 'not_exists') {
@@ -17,6 +19,13 @@ exports.helloGCS = function (event, callback) {
   } else {
     console.log(`File ${file.name} metadata updated.`);
   }
+
+  const topic = pubsub.topic('application-updates');
+    
+  topic.publish({ eventType: "NEW_FILE_UPLOADED", uploadedFileId: file.name }).then(function(data) {
+    var messageIds = data[0];
+    console.log(data);
+  });
 
   callback();
 };
