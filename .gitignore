@@ -112,3 +112,9 @@ Backup*/
 UpgradeLog*.XML
 
 src/UITests/results.xml
+
+# Gabe's
+.gitignore
+_gabe_/
+.idea/
+venv/
