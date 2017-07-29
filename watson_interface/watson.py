@@ -12,7 +12,17 @@ import os
 import json
 from watson_developer_cloud import SpeechToTextV1
 
-RESOURCES_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "resources")
+# mock SpeechToTextV1 for TESTING ONLY (comment otherwise)
+class SpeechToTextV1:
+    def __init__(self, *args, **kwargs): pass
+    def get_model(self, *args, **kwargs): return {'name': 'Test'}
+    def recognize(self, *args, **kwargs):
+        return {"results": [{"alternatives": [{"timestamps": [["you have been mocked"]]}]}],
+                "speaker_labels": [{"from": 0.03, "to": 0.22, "speaker": 0}]}
+
+
+INPUT_FOLDER = os.path.join(os.path.dirname(__file__), "tests", "input")
+OUTPUT_FOLDER = os.path.join(os.path.dirname(__file__), "tests", "output")
 CREDENTIALS_JSON_PATH = "watson_credentials.json"
 RECOGNITION_MODEL = 'en-US_BroadbandModel'  # en-US_BroadbandModel or en-US_NarrowbandModel (for english)
 
@@ -22,7 +32,7 @@ def print_json(x):
 
 
 def save_json(json_data, filepath):
-    with open(os.path.join(RESOURCES_DIR, filepath), 'w') as fp:
+    with open(os.path.join(OUTPUT_FOLDER, filepath), 'w') as fp:
         json.dump(json_data, fp)
 
 
@@ -102,10 +112,10 @@ if __name__ == '__main__':
     import datetime
     start_time = datetime.datetime.now()
 
-    filepath = os.path.join(RESOURCES_DIR, r'fish.mp3')  # 1:53 mp3 audio file
+    filepath = os.path.join(INPUT_FOLDER, r'fish.mp3')  # 1:53 mp3 audio file
     recognize_with_watson(filepath)
 
-    filepath = os.path.join(RESOURCES_DIR, 'recognized_{}.json'.format(RECOGNITION_MODEL))
+    filepath = os.path.join(OUTPUT_FOLDER, 'recognized_{}.json'.format(RECOGNITION_MODEL))
     name_map = None  # {0: 'James', 1: 'Anna', 2: 'Dan', 3: 'Andy'}  # if unknown: None
     extract_info_from_recognized_data(filepath, name_map=name_map)
 
