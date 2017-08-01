@@ -28,7 +28,10 @@ Speaker Diarization from Speech Transcripts: ftp://m170.limsi.fr/public/TuC2105o
 
 [LIUM Speaker Diarization (Plenty of Papers available on Wiki)](http://www-lium.univ-lemans.fr/diarization/doku.php/overview)
 
-[Diarize-jruby (Used by BBC World Services R&D)](https://github.com/bbc/diarize-jruby)
+[Diarize-jruby (Used by BBC World Services R&D)](https://github.com/bbc/diarize-jruby) (ruby wrapper around LIUM)
+
+[VoiceID](https://github.com/BackupGGCode/voiceid) (python2.7 wrapper around LIUM)
+
 
 
 ### Speech Recognition
