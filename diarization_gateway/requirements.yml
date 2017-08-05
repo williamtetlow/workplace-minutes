@@ -1,0 +1,17 @@
+name: workplace_venv
+dependencies:
+  - python=3.6
+  - numpy
+  - matplotlib
+  - scipy
+  - simplejson
+  - scikit-learn
+  - flask
+  - pip:
+    - watson-developer-cloud
+    - eyed3
+    - pydub
+    - git+git://github.com/gabrielecalvo/pyAudioAnalysis.git # py3 fork
+    # might need to get built wheels
+    - hmmlearn
+    # - pytest  # for testing only
