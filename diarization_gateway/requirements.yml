@@ -8,6 +8,7 @@ dependencies:
   - scikit-learn
   - flask
   - pip:
+    - flask-restplus
     - watson-developer-cloud
     - eyed3
     - pydub
