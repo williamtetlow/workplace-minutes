@@ -21,7 +21,7 @@ export default class UploadRecording extends Component {
 	};
 
 	_discardRecording() {
-		
+		this.
 	}
 	
 	_uploadRecording(filePath) {
@@ -33,7 +33,7 @@ export default class UploadRecording extends Component {
 			.putFile(filePath)
 			.on('state_changed', 
 				snapshot => {
-					this.setState({uploadProgress: `${snapshot.bytesTransferred} / ${snapshot.totalBytes}`});
+					//this.setState({uploadProgress: `${snapshot.bytesTransferred} / ${snapshot.totalBytes}`});
 					console.log(snapshot);
 				}, 
 				err => {

@@ -6,20 +6,37 @@ import Login from './Login';
 import Record from './Record';
 import RecordingHistory from './RecordingHistory';
 import ScrollableTabView, {DefaultTabBar} from 'react-native-scrollable-tab-view';
-
+import { UnauthenticatedApp, AuthenticatedApp } from "./router";
+import firebase from './firebase';
 export default class WorkplaceMobile extends Component {
-  render() {
-    const isLoggedIn = true;//this.state.isLoggedIn;
-    if (isLoggedIn) {
-      return (
-        <ScrollableTabView
-          renderTabBar={() => <DefaultTabBar />}>
-          <Record tabLabel='Record'/>
-          <RecordingHistory tabLabel='History'/>
-        </ScrollableTabView>
-      );
+
+  constructor() {
+    super();
+    this.unsubscribe = null;
+  }
+
+  componentDidMount() {
+    this.unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.loggedIn = true;
+      } else {
+        this.loggedIn = false;
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    if (this.unsubscribe) {
+      this.unsubscribe();
     }
-    return (<Login/>);
+  }
+
+  render() {
+    const isLoggedIn = firebase.auth().authenticated;
+    if (isLoggedIn) {
+      return (<AuthenticatedApp/>);
+    }
+    return (<UnauthenticatedApp/>);
   }
 }
 

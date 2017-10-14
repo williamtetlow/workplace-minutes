@@ -4,29 +4,71 @@ import {
   StyleSheet,
   Dimensions,
   Text,
-  View
+  View,
+  Image,
+  KeyboardAvoidingView
 } from 'react-native';
-import { Image, Container, Header, Content, Form, Item, Input, Button, Label, Footer, Grid, Col } from 'native-base';
+import {
+  Container,
+  Header,
+  Content,
+  Form,
+  Item,
+  Input,
+  Button,
+  Label,
+  Footer,
+  Grid,
+  Col,
+  Row
+} from 'native-base';
+import firebase from './firebase';
 
 export default class Login extends Component {
+  state = {
+    username: '',
+    password: ''
+  };
+
   _onPressLogin() {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then(user => {
+        console.log('User successfully logged in', user);
+        this.props.navigator.replace({id: "SomeOtherComponent"});
+      })
+      .catch(err => {
+        console.error('User signin error', err);
+      });
   }
+
   render() {
     return (
       <Container>
-        <View style={styles.container}>
-          <Content>
+        <Grid>
+          <Row size={45}>
+            <View>
+              <Image source={require('./img/logo.png')} />
+            </View>
+          </Row>
+
+          <Row size={45}>
             <View style={styles.loginForm}>
               <Item>
                 <Input
                   underline
-                  placeholder="Username" />
+                  placeholder="E-mail"
+                  onChangeText={email => this.setState({ email })}
+                />
               </Item>
               <Item last>
                 <Input
                   underline
                   placeholder="Password"
-                  secureTextEntry={true} />
+                  secureTextEntry={true}
+                  onChangeText={password => this.setState({ password })}
+                />
               </Item>
               <Button
                 block
@@ -37,20 +79,30 @@ export default class Login extends Component {
                 <Text style={styles.btnText}>Login</Text>
               </Button>
             </View>
-          </Content>
-          <Footer style={styles.footer}>
-            <Grid>
-              <Col style={{ height: 200 }}>
-                <Button transparent style={{ alignSelf: 'flex-start' }}>
-                  <Text>Create Account</Text>
-                </Button></Col>
-              <Col style={{ height: 200 }}>
-                <Button transparent style={{ alignSelf: 'flex-end' }}>
-                  <Text>Forgot Password?</Text>
-                </Button></Col>
-            </Grid>
-          </Footer>
-        </View>
+          </Row>
+
+          <Row size={10}>
+            <Col style={{ height: 200, paddingTop: 20 }}>
+              <Button
+                transparent
+                style={{ alignSelf: 'flex-start' }}
+                onPress={() => this.props.navigation.navigate('Register')}
+              >
+                <Text>Create Account</Text>
+              </Button>
+            </Col>
+            <Col style={{ height: 200, paddingTop: 20 }}>
+              <Button
+                transparent
+                style={{ alignSelf: 'flex-end' }}
+                onPress={() =>
+                  this.props.navigation.navigate('ForgottenPassword')}
+              >
+                <Text>Forgot Password?</Text>
+              </Button>
+            </Col>
+          </Row>
+        </Grid>
       </Container>
     );
   }
@@ -60,29 +112,21 @@ const deviceHeight = Dimensions.get('window').height;
 
 const styles = {
   container: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: '#FBFAFA',
+    flex: 1
   },
   shadow: {
     flex: 1,
     width: null,
-    height: null,
+    height: null
   },
   loginForm: {
     flex: 1,
-    marginTop: deviceHeight / 3,
-    paddingTop: 20,
     paddingLeft: 40,
     paddingRight: 40,
-    paddingBottom: 30,
-    bottom: 0,
+    bottom: 0
   },
   input: {
-    marginBottom: 20,
+    marginBottom: 20
   },
   btn: {
     marginTop: 40
