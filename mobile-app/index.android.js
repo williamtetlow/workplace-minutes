@@ -36,7 +36,7 @@ export default class WorkplaceMobile extends Component {
     if (isLoggedIn) {
       return (<AuthenticatedApp/>);
     }
-    return (<UnauthenticatedApp/>);
+    return (<AuthenticatedApp/>);
   }
 }
 

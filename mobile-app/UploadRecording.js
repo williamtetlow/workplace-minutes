@@ -21,7 +21,6 @@ export default class UploadRecording extends Component {
 	};
 
 	_discardRecording() {
-		this.
 	}
 	
 	_uploadRecording(filePath) {
