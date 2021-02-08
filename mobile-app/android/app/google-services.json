@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "900371536249",
+    "firebase_url": "https://workplace-3d1d6.firebaseio.com",
+    "project_id": "workplace-3d1d6",
+    "storage_bucket": "workplace-3d1d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:900371536249:android:65a182e7d09c18fb",
+        "android_client_info": {
+          "package_name": "com.workplacemobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "900371536249-l6uciolluo3fkioab8vnglaopm49938k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATnVjAzuGQc6wKNNMqhahEWJu7HIGX7RQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

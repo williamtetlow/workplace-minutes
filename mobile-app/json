@@ -1,0 +1,7 @@
+{
+    "recordings": {
+        "1": { "description": "recording1" },
+        "2": { "description": "recording2" },
+        "3": { "description": "recording3" }
+    }
+}
